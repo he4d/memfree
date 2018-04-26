@@ -72,17 +72,9 @@ usage()
 	exit(EXIT_SUCCESS);
 }
 
-void
-print_memfree() {
-}
-
 int
 main(int argc, char *argv[])
 {
-
-	if (pledge("stdio vminfo", NULL) == -1)
-		err(EXIT_FAILURE, "pledge");
-
 	int ch;
 	while ((ch = getopt(argc, argv, "vh")) != -1) {
 		switch (ch) {
@@ -95,6 +87,9 @@ main(int argc, char *argv[])
 				break;
 		}
 	}
+
+	if (pledge("stdio vminfo", NULL) == -1)
+		err(EXIT_FAILURE, "pledge");
 
 	memset(&meminfo, 0, sizeof(struct meminfo_s));
 	read_meminfo();
