@@ -1,0 +1,10 @@
+memfree - free like cli tool for *bsd
+=====================================
+
+Requirements
+------------
+None
+
+Installation
+------------
+make clean install
