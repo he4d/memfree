@@ -69,10 +69,9 @@ read_meminfo()
 }
 
 void
-usage()
+print_usage()
 {
 	fprintf(stderr, "Usage output here...\n");
-	exit(EXIT_SUCCESS);
 }
 
 int
@@ -85,7 +84,8 @@ main(int argc, char *argv[])
 				fprintf(stderr, "memfree-"VERSION"\n");
 				return 0;
 			case 'h':
-				usage();
+				print_usage();
+				return 0;
 			default:
 				break;
 		}
