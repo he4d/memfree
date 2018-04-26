@@ -7,8 +7,8 @@
 #include <sys/sysctl.h>
 
 #define pagetok(size) ((size) << pageshift)
-#define MAX_STRING_LENGTH	16
 #define LOG1024			10
+#define NUM_STRINGS 	 	11
 
 static int pageshift;
 
@@ -27,8 +27,13 @@ struct meminfo_s {
 char *
 format_k(int amt)
 {
-	char *ret = NULL;
-	char tag = 'K';
+        static char retarray[NUM_STRINGS][16];
+        static int  idx = 0;
+        char *ret, tag = 'K';
+
+        ret = retarray[idx];
+        idx = (idx + 1) % NUM_STRINGS;
+
         if (amt >= 10000) {
                 amt = (amt + 512) / 1024;
                 tag = 'M';
@@ -37,10 +42,8 @@ format_k(int amt)
                         tag = 'G';
                 }
         }
-	size_t size = snprintf(NULL, 0, "%d%c", amt, tag);
-	ret = malloc(size + 1);
-        snprintf(ret, size + 1, "%d%c", amt, tag);
-        return ret;
+        snprintf(ret, sizeof(retarray[0]), "%d%c", amt, tag);
+        return (ret);
 }
 
 void
