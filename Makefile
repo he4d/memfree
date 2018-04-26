@@ -1,4 +1,4 @@
-# memfree - free like cli tool for *bsd 
+# memfree - linux free(1) like tool for OpenBSD
 # See LICENSE file for copyright and license details.
 
 # memfree version
